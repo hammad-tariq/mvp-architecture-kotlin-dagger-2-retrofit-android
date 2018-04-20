@@ -1,6 +1,6 @@
 # mvp-architecture-kotlin-dagger-2-retrofit-android
 
-we will learn MVP(Model-View-Presenter) in Android using Kotlin and we will implement Dependency Injection(DI) using Dagger2 library and we will also use Retrofit using Kotlin in our sample project to learn everything together.
+We will learn MVP(Model-View-Presenter) in Android using Kotlin and we will implement Dependency Injection(DI) using Dagger2 library and We will also use Retrofit using Kotlin in our sample project to learn everything together.
 
 We will learn everything in the following sequence.
 We will learn about MVP Design Pattern.
