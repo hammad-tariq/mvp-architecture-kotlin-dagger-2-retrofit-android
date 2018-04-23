@@ -28,14 +28,13 @@ class LoginActivity : AppCompatActivity(), LoginView {
     @Inject
     lateinit var mNetworkApi: INetworkApi
 
-    lateinit var applicationComponent: Application
+
 
     override fun onPasswordError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onBackPress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun navigateToHome() {
