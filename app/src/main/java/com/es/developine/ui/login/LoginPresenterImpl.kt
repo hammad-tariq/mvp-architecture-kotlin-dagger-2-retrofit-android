@@ -5,13 +5,14 @@ import android.util.Log
 import com.es.developine.ApplicationClass
 import com.es.developine.data.PostData
 import com.es.developine.network.INetworkApi
+import com.es.developine.ui.Preseneter
 import com.google.gson.JsonElement
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.schedulers.IoScheduler
 import javax.inject.Inject
 
-class LoginPresenterImpl(var loginViewInit: LoginView, var applicationComponent: Application) : LoginPresenter {
+class LoginPresenterImpl(var loginViewInit: LoginView, var applicationComponent: Application) : LoginPresenter,Preseneter<LoginView>(loginViewInit) {
 
     @Inject
     lateinit var mNetworkApi: INetworkApi
@@ -21,7 +22,6 @@ class LoginPresenterImpl(var loginViewInit: LoginView, var applicationComponent:
     }
 
     override fun validateUser(userName: String, userPassword: String) {
-
 
     }
 

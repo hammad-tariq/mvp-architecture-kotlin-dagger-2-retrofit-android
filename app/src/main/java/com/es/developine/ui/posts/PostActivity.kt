@@ -8,13 +8,34 @@ import android.util.Log
 import com.es.developine.ApplicationClass
 import com.es.developine.R
 import com.es.developine.data.PostData
+import com.es.developine.ui.BaseActivity
 import com.es.developine.ui.login.LoginPresenter
+import com.es.developine.ui.login.LoginPresenterImpl
 import kotlinx.android.synthetic.main.activity_post.*
 
-class PostActivity : AppCompatActivity(), PostView {
+class PostActivity : BaseActivity(), PostView {
 
 
-    lateinit var postPresenter: PostPresenter
+   var postPresenter: PostPresenterImpl?=null
+
+
+    override fun setLayout(): Int {
+
+        return R.layout.activity_post;
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
+        postPresenter = PostPresenterImpl(this, application)
+      //  postPresenter.getAllPosts()
+        getPresenter()?.let {
+            it.getAllPosts()
+        }
+    }
+
+    fun getPresenter(): PostPresenterImpl?{
+        postPresenter = PostPresenterImpl(this, application)
+        return postPresenter
+    }
 
 
     override fun showAllPosts(postList: List<PostData>) {
@@ -26,14 +47,20 @@ class PostActivity : AppCompatActivity(), PostView {
     }
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_post)
 
 
-        postPresenter = PostPresenterImpl(this, application)
-
-        postPresenter.getAllPosts()
+    override fun onStartScreen() {
     }
+
+    override fun stopScreen() {
+        postPresenter?.let {
+            postPresenter!!.unbindView()
+            postPresenter = null
+        }
+
+    }
+
+
+
 
 }

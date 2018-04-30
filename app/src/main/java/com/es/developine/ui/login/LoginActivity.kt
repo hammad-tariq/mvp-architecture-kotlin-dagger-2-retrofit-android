@@ -10,24 +10,41 @@ import com.es.developine.network.INetworkApi
 import com.es.developine.ui.BaseActivity
 import javax.inject.Inject
 
-class LoginActivity : AppCompatActivity(), LoginView {
+class LoginActivity : BaseActivity(), LoginView {
 
-    lateinit var loginPresenter: LoginPresenter
+    var loginPresenter: LoginPresenterImpl?=null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-
-        (application as ApplicationClass).applicationComponent.inject(this)
-        loginPresenter = LoginPresenterImpl(this, application)
-        loginPresenter.validateUser("hammad", "")
-
+    override fun setLayout(): Int {
+       return  R.layout.activity_login
     }
 
 
-    @Inject
-    lateinit var mNetworkApi: INetworkApi
+    override fun init(savedInstanceState: Bundle?) {
+        (application as ApplicationClass).applicationComponent.inject(this)
 
+        getPresenter()?.let {
+            it.validateUser("hammad", "")
+        }
+      //  loginPresenter.validateUser("hammad", "")
+    }
+
+
+    fun getPresenter():LoginPresenterImpl?{
+       loginPresenter = LoginPresenterImpl(this, application)
+        return loginPresenter
+    }
+
+
+    override fun onStartScreen() {
+
+    }
+
+    override fun stopScreen() {
+        loginPresenter?.let {
+            loginPresenter!!.unbindView()
+            loginPresenter = null
+        }
+     }
 
 
     override fun onPasswordError() {
@@ -40,4 +57,5 @@ class LoginActivity : AppCompatActivity(), LoginView {
     override fun navigateToHome() {
         Toast.makeText(this, "Hello MVP", Toast.LENGTH_SHORT).show()
     }
+
 }
