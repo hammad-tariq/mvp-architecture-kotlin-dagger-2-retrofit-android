@@ -21,7 +21,7 @@ abstract class BaseActivity : AppCompatActivity(),IView {
      * A dialog showing a progress indicator and an optional text message or
      * view.
      */
-    protected lateinit var mProgressDialog: ProgressDialog
+    protected var mProgressDialog: ProgressDialog?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +33,13 @@ abstract class BaseActivity : AppCompatActivity(),IView {
     }
 
     fun initialzeProgressDialoge(){
-        mProgressDialog = ProgressDialog(this)
-        mProgressDialog.isIndeterminate = true
-        mProgressDialog.setCancelable(false)
+
+        if(mProgressDialog==null) {
+
+            mProgressDialog = ProgressDialog(this)
+            mProgressDialog!!.isIndeterminate = true
+            mProgressDialog!!.setCancelable(false)
+        }
 
     }
 
@@ -52,6 +56,8 @@ abstract class BaseActivity : AppCompatActivity(),IView {
         super.onDestroy()
         System.gc()
         System.runFinalization()
+        dismissProgress()
+        mProgressDialog=null
     }
 
 
@@ -68,21 +74,21 @@ abstract class BaseActivity : AppCompatActivity(),IView {
         if (isFinishing)
             return
 
-        if (mProgressDialog.isShowing) {
+        if (mProgressDialog!!.isShowing) {
             return
         }
 
         if (msgResId != 0) {
-            mProgressDialog.setMessage(resources.getString(msgResId))
+            mProgressDialog?.setMessage(resources.getString(msgResId))
         }
 
         if (keyListener != null) {
-            mProgressDialog.setOnKeyListener(keyListener)
+            mProgressDialog?.setOnKeyListener(keyListener)
 
         } else {
-            mProgressDialog.setCancelable(false)
+            mProgressDialog?.setCancelable(false)
         }
-        mProgressDialog.show()
+        mProgressDialog?.show()
     }
 
     /**
@@ -90,7 +96,7 @@ abstract class BaseActivity : AppCompatActivity(),IView {
      */
     fun setCancelableProgress(isCancel: Boolean) {
         if (mProgressDialog != null) {
-            mProgressDialog.setCancelable(true)
+            mProgressDialog?.setCancelable(true)
         }
     }
 
@@ -98,8 +104,8 @@ abstract class BaseActivity : AppCompatActivity(),IView {
      * cancel progress dialog.
      */
     fun dismissProgress() {
-        if (mProgressDialog != null && mProgressDialog.isShowing) {
-            mProgressDialog.dismiss()
+        if (mProgressDialog != null && mProgressDialog!!.isShowing) {
+            mProgressDialog?.dismiss()
         }
     }
 

@@ -4,6 +4,7 @@ buildscript {
     ext {
         kotlin_version = '1.2.30'
         retrofit_version = '2.4.0'
+        okhttpVersion="3.10.0"
     }
     repositories {
         google()

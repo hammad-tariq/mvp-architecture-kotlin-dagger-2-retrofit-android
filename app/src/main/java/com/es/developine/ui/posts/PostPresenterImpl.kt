@@ -7,6 +7,7 @@ import com.es.developine.network.INetworkApi
 import com.es.developine.ui.Preseneter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.schedulers.IoScheduler
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class PostPresenterImpl(var postView: PostView, var applicationComponent: Application) : PostPresenter,Preseneter<PostView>(postView) {
@@ -27,16 +28,20 @@ class PostPresenterImpl(var postView: PostView, var applicationComponent: Applic
             it.showLoading()
             var allPosts = mNetworkApi.getAllPosts()
             addDisposable(allPosts.subscribeOn(IoScheduler()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe {
-                        result ->
-                        view?.let {
-                            it.hideLoading()
-                            postView.showAllPosts(result)
+                    .subscribe(
+                            { result ->
+                                view?.let {
+                                    it.hideLoading()
+                                    postView.showAllPosts(result)
 
-                        }
-                    })
-
-        }
+                                }
+                            },
+                            { error ->
+                                view?.let {
+                                    it.hideLoading()
+                                }
+                            }
+                    ) ) }
     }
 
 
