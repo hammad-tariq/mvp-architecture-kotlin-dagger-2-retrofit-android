@@ -25,7 +25,6 @@ class PostActivity : BaseActivity(), PostView {
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        postPresenter = PostPresenterImpl(this, application)
       //  postPresenter.getAllPosts()
         getPresenter()?.let {
             it.getAllPosts()

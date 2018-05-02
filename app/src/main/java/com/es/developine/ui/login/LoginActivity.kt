@@ -20,12 +20,9 @@ class LoginActivity : BaseActivity(), LoginView {
 
 
     override fun init(savedInstanceState: Bundle?) {
-        (application as ApplicationClass).applicationComponent.inject(this)
-
         getPresenter()?.let {
             it.validateUser("hammad", "")
         }
-      //  loginPresenter.validateUser("hammad", "")
     }
 
 

@@ -14,7 +14,6 @@ interface ApplicationComponent {
 
     fun inject(mewApplication: ApplicationClass)
     fun inject(mLoginPresenterImpl: LoginPresenterImpl)
-    fun inject(mLoginActivity: LoginActivity)
     fun inject(mPostPresenterImpl: PostPresenterImpl)
 
 }
