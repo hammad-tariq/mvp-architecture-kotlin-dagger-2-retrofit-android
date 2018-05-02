@@ -10,7 +10,6 @@ import javax.inject.Inject
 
 class PostPresenterImpl(var postView: PostView, var applicationComponent: Application) : PostPresenter {
 
-
     @Inject
     lateinit var mNetworkApi: INetworkApi
 
@@ -19,7 +18,6 @@ class PostPresenterImpl(var postView: PostView, var applicationComponent: Applic
     }
 
     override fun getAllPosts() {
-
         var allPosts = mNetworkApi.getAllPosts()
         allPosts.subscribeOn(IoScheduler()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe {

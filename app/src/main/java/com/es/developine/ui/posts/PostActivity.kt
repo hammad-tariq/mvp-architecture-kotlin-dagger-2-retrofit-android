@@ -17,23 +17,21 @@ class PostActivity : AppCompatActivity(), PostView {
     lateinit var postPresenter: PostPresenter
 
 
-    override fun showAllPosts(postList: List<PostData>) {
-
-        Log.d("Response", "" + postList)
-
-        rv_post_list.layoutManager = LinearLayoutManager(this)
-        rv_post_list.adapter = PostItemAdapter(postList, this)
-    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
 
 
         postPresenter = PostPresenterImpl(this, application)
-
         postPresenter.getAllPosts()
+    }
+
+
+    override fun showAllPosts(postList: List<PostData>) {
+
+        Log.d("Response", "" + postList)
+        rv_post_list.layoutManager = LinearLayoutManager(this)
+        rv_post_list.adapter = PostItemAdapter(postList, this)
     }
 
 }
