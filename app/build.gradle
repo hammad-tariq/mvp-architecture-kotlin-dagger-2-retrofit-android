@@ -11,7 +11,7 @@ android {
     }
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.es.mewphone"
+        applicationId "com.developine.kotlinmvp"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1

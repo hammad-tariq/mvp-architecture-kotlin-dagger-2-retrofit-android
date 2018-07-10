@@ -33,13 +33,6 @@ class PostActivity : BaseActivity(), PostView {
     }
 
 
-    override fun showAllPosts(postList: List<PostData>) {
-
-        Log.d("Response", "" + postList)
-
-        rv_post_list.layoutManager = LinearLayoutManager(this)
-        rv_post_list.adapter = PostItemAdapter(postList, this)
-    }
 
 
 
@@ -56,6 +49,15 @@ class PostActivity : BaseActivity(), PostView {
     }
 
 
+
+
+
+    override fun showAllPosts(postList: List<PostData>) {
+
+        Log.d("Response", "" + postList)
+        rv_post_list.layoutManager = LinearLayoutManager(this)
+        rv_post_list.adapter = PostItemAdapter(postList, this)
+    }
 
 
 }
